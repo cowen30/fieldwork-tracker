@@ -4,4 +4,5 @@ Rails.application.routes.draw do
 	resources :age_groups, path: '/age-groups'
 	resources :area_types, path: '/area-types'
 	resources :emphasis_types, path: '/emphasis-types'
+	resources :locations
 end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_12_04_200336) do
+ActiveRecord::Schema.define(version: 2022_01_25_214100) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -42,6 +42,18 @@ ActiveRecord::Schema.define(version: 2021_12_04_200336) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "locations", force: :cascade do |t|
+    t.string "name"
+    t.integer "user_id"
+    t.integer "emphasis_type_id"
+    t.integer "area_type_id"
+    t.integer "age_group_id"
+    t.integer "created_by"
+    t.integer "updated_by"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "first_name"
     t.string "middle_name"
@@ -62,5 +74,11 @@ ActiveRecord::Schema.define(version: 2021_12_04_200336) do
   add_foreign_key "area_types", "users", column: "updated_by"
   add_foreign_key "emphasis_types", "users", column: "created_by"
   add_foreign_key "emphasis_types", "users", column: "updated_by"
+  add_foreign_key "locations", "age_groups"
+  add_foreign_key "locations", "area_types"
+  add_foreign_key "locations", "emphasis_types"
+  add_foreign_key "locations", "users"
+  add_foreign_key "locations", "users", column: "created_by"
+  add_foreign_key "locations", "users", column: "updated_by"
   add_foreign_key "users", "users", column: "updated_by"
 end
